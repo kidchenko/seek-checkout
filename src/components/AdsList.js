@@ -1,25 +1,10 @@
 import React, { Component } from 'react';
+import { classic, standout, premium } from './AdsModel';
 
 const ads = [
-  {
-    id : 'classic',
-    name : 'Classic Ad',
-    description: 'Offers the most basic level of advertisement',
-    price: 269.99
-  },
-  {
-    id : 'standout',
-    name : 'Standout Ad',
-    description: 'Allows advertisers to use a company logo and use a longer presentation text',
-    price: 322.99
-  },
-  {
-    id : 'premium',
-    name : 'Premium Ad',
-    description: 'Same benefits as Standout Ad, but also puts the advertisement at the top of the results, allowing higher visibility',
-    price: 394.99
-  },
-
+  classic,
+  standout,
+  premium,
 ]
 
 class AdsList extends Component {
@@ -70,7 +55,7 @@ class AdsList extends Component {
 
   addToCart(e) {
     e.preventDefault();
-    console.log('add to cart');
+    console.log(e, 'add to cart');
   }
 }
 
