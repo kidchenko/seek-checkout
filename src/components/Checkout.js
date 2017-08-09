@@ -1,6 +1,9 @@
+import { DefaultPriceRule } from './PriceRuleModel';
+
 class Checkout {
 
   pricingRules = [];
+  rule;
   itens = []
 
   constructor(pricingRules) {
@@ -12,9 +15,9 @@ class Checkout {
   }
 
   total() {
-    var total = this.itens.reduce((before, current) => {
-      return before + current.price;
-    }, 0)
+    let total = this.pricingRules.reduce((before, current) => {
+      return before + current.calculate(this.itens);
+    }, 0);
     return total;
   }
 }

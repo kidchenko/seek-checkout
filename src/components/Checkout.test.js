@@ -1,15 +1,16 @@
 import Checkout from './Checkout'
 import { classic, standout, premium } from './AdsModel';
+import { DefaultPriceRule, QuantityDealRule, PriceDiscountRule, PriceDiscountByQuantityRule } from './PriceRuleModel';
 
 it('can create Checkout', () => {
-  let co = new Checkout({});
+  let co = new Checkout([new DefaultPriceRule()]);
   expect(co.total()).toBe(0);
 });
 
 describe('Customer: default', () => {
 
   it('should pay for classic, standout and premium', () => {
-    let co = new Checkout({});
+    let co = new Checkout([new DefaultPriceRule()]);
     co.add(classic);
     co.add(standout);
     co.add(premium);
@@ -17,7 +18,7 @@ describe('Customer: default', () => {
   });
 
   it('should pay for 2x classic, 2x standout and 2x premium without discount', () => {
-    let co = new Checkout({});
+    let co = new Checkout([new DefaultPriceRule()]);
     co.add(classic);
     co.add(classic);
     co.add(standout);
@@ -31,7 +32,7 @@ describe('Customer: default', () => {
 describe('Customer: UNILEVER', () => {
 
   it('should apply 3 for 2 deal on Classic Ads', () => {
-    let co = new Checkout({});
+    let co = new Checkout([new QuantityDealRule(3, 2, classic.id)]);
     co.add(classic);
     co.add(classic);
     co.add(classic);
@@ -40,7 +41,7 @@ describe('Customer: UNILEVER', () => {
   });
 
   it('should apply 6 for 4 deal on Classic Ads', () => {
-    let co = new Checkout({});
+    let co = new Checkout([new QuantityDealRule(3, 2, classic.id)]);
     co.add(classic);
     co.add(classic);
     co.add(classic);
@@ -53,7 +54,7 @@ describe('Customer: UNILEVER', () => {
   });
 
   it('should pay for 2x classic, 2x standout and 2x premium without discount', () => {
-    let co = new Checkout({});
+    let co = new Checkout([new QuantityDealRule(3, 2, classic.id)]);
     co.add(classic);
     co.add(classic);
     co.add(standout);
@@ -67,7 +68,7 @@ describe('Customer: UNILEVER', () => {
 describe('Customer: APPLE', () => {
 
   it('should get a discount on Standout Ads where the price drops to $299.99 per ad', () => {
-    let co = new Checkout({});
+    let co = new Checkout([new PriceDiscountRule(299.99, standout.id)]);
     co.add(standout);
     co.add(standout);
     co.add(standout);
@@ -76,7 +77,7 @@ describe('Customer: APPLE', () => {
   });
 
   it('should pay for 2x classic and 2x premium without discount', () => {
-    let co = new Checkout({});
+    let co = new Checkout([new PriceDiscountRule(299.99, standout.id)]);
     co.add(classic);
     co.add(classic);
     co.add(premium);
@@ -88,7 +89,7 @@ describe('Customer: APPLE', () => {
 describe('Customer: NIKE', () => {
 
   it('should get a discount on Premium Ads where 4 or more are purchased', () => {
-    let co = new Checkout({});
+    let co = new Checkout([new PriceDiscountByQuantityRule(379.99, premium.id, 4)]);
     co.add(premium);
     co.add(premium);
     co.add(premium);
@@ -96,8 +97,8 @@ describe('Customer: NIKE', () => {
     expect(co.total()).toBe(1519.96);
   });
 
-  it('should pay normaly for less than 4 Premium Ads', () => {
-    let co = new Checkout({});
+  it('should pay normally for less than 4 Premium Ads', () => {
+    let co = new Checkout([new PriceDiscountByQuantityRule(379.99, premium.id, 4)]);
     co.add(premium);
     co.add(premium);
     co.add(premium);
@@ -108,8 +109,8 @@ describe('Customer: NIKE', () => {
 
 describe('Customer: FORD', () => {
 
-  it('Gets a 5 for 4 deal on Classic Ads', () => {
-    let co = new Checkout({});
+  it('should apply a 5 for 4 deal on Classic Ads', () => {
+    let co = new Checkout([new QuantityDealRule(5, 4, classic.id)]);
     co.add(classic);
     co.add(classic);
     co.add(classic);
@@ -118,16 +119,46 @@ describe('Customer: FORD', () => {
     expect(co.total()).toBe(1079.96);
   });
 
-  it('Gets a discount on Standout Ads where the price drops to $309.99 per ad', () => {
-    let co = new Checkout({});
-    expect(co.total()).toBe(1079.96);
+  it('should get a discount on Standout Ads where the price drops to $309.99 per ad', () => {
+    let co = new Checkout([new PriceDiscountRule(309.99, standout.id)]);
+    co.add(standout);
+    co.add(standout);
+    expect(co.total()).toBe(619.98);
   });
 
-  it('Gets a discount on Premium Ads when 3 or more are purchased. The price drops to $389.99 per ad', () => {
-    let co = new Checkout({});
-    expect(co.total()).toBe(1079.96);
+  it('should get a discount discount on Premium Ads when 3 or more are purchased pay $389.99 per ad', () => {
+    let co = new Checkout([new PriceDiscountByQuantityRule(389.99, premium.id, 3)]);
+    co.add(premium);
+    co.add(premium);
+    co.add(premium);
+    expect(co.total()).toBe(1169.97);
   });
 
+  it('should pay normally for less than 3 premium ads', () => {
+    let co = new Checkout([new PriceDiscountByQuantityRule(389.99, premium.id, 3)]);
+    co.add(premium);
+    co.add(premium);
+    expect(co.total()).toBe(789.98);
+  });
+
+  it('should get a discount when have multiple price rules', () => {
+    let co = new Checkout([
+      new QuantityDealRule(5, 4, classic.id),
+      new PriceDiscountRule(309.99, standout.id),
+      new PriceDiscountByQuantityRule(389.99, premium.id, 3)
+    ]);
+    co.add(classic);
+    co.add(classic);
+    co.add(classic);
+    co.add(classic);
+    co.add(classic);
+    co.add(standout);
+    co.add(standout);
+    co.add(premium);
+    co.add(premium);
+    co.add(premium);
+    expect(co.total()).toBe(2869.91);
+  })
 });
 
 
