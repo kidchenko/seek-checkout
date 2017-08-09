@@ -1,8 +1,8 @@
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
-Hours codding: 2h
+Hours codding: 11h
 
-Cups of coffee: 1
+Cups of coffee: 5
 
 What I learned:
 - Use react-router
