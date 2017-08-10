@@ -1,4 +1,4 @@
-import Checkout from './Checkout'
+import Checkout from './checkout'
 import { classic, standout, premium } from './AdsModel';
 import { DefaultPriceRule, QuantityDealRule, PriceDiscountRule, PriceDiscountByQuantityRule } from './PriceRuleModel';
 
