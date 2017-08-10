@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import fakeAuth from './Header/FakeAuth';
+import fakeAuth from '../Header/FakeAuth';
 import { Redirect } from 'react-router-dom'
+
+import CustomerListItem from './CustomerListItem';
 
 const customers = [
   {
@@ -24,7 +26,7 @@ const customers = [
   {
     name: 'SPACEX'
   },
-]
+];
 
 class CustomertList extends Component {
 
@@ -37,6 +39,12 @@ class CustomertList extends Component {
     console.log('login');
     fakeAuth.authenticate(() => {
       this.setState({ redirectToReferrer: true })
+    })
+  }
+
+  renderCustomers() {
+    return customers.map((customer, i) => {
+      return <CustomerListItem key={i} customer={customer} />
     })
   }
 
@@ -56,9 +64,7 @@ class CustomertList extends Component {
         <form>
           <select>
           {
-            customers.map((customer, i) => {
-              return <option key={i} value={customer.name}>{customer.name}</option>
-            })
+            this.renderCustomers()
           }
           </select>
           <button onClick={this.login.bind(this)}>Login</button>

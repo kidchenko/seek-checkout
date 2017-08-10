@@ -1,13 +1,30 @@
+# SEEK Coding Exercise
+
+**I could not finish and I would need more time.**
+
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
-Coding Activity: 18h
+Coding Activity: 19h
 
-Cups of coffee: 9
+Cups of coffee: 10
 
-What I learned in this exercise:
-- React
-- Use react-router
+## What I learned in this exercise:
+- React <3
+- Use react-router;
+- I really could have use the time of a more efficient manner;
 - ~~Redux (I studied a lot, but I didn't implement)~~
+
+
+## My pain points
+- I could not deliver a satisfactory version, I did not use time efficiently and I chose a path not so good for me;
+- I am not fluent in React, so I think that this is one of the principal pain point, it consumed a lot of time because I was frozen at various times. But I'm not regret I learned a lot;
+- The cart rule is broken, I really tried my best, but I took a beating of FORD rule :c
+- Yeah, I know that the code is not clear and I am doing a lot of mess with reactjs... I know that I should not handle the events in the components, it is a just a start code, but I didn't had time of move to parent components.
+
+
+<img src="exercise-and-me.gif" />
+The exercise and me!
+
 
 ## Running in your machine
 
@@ -19,10 +36,6 @@ What I learned in this exercise:
 <img  src="./print1.png">
 
 <img  src="./print2.png">
-
-<img  src="./print3.png">
-
-<img  src="./print4.png">
 
 ## Available Scripts
 
