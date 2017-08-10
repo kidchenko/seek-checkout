@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export function CustomerListItem(props){
+export default function CustomerListItem(props){
   return (
       <option value={props.customer.value}>{props.customer.name}</option>
     )
@@ -12,5 +12,3 @@ CustomerListItem.propTypes = {
     name: PropTypes.string.isRequired
   }).isRequired
 };
-
-export default CustomerListItem;

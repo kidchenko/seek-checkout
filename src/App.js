@@ -37,6 +37,13 @@ export default class App extends Component {
     });
   }
 
+  checkout() {
+    alert(`You paid ${this.state.cart.total()}`)
+    this.setState({
+      cart: new Checkout()
+    });
+  }
+
   render() {
     return (
         <div>
@@ -50,6 +57,7 @@ export default class App extends Component {
           <CheckoutForm
               itens={this.state.cart.getItens()}
               total={this.state.cart.total()}
+              onCheckout={this.checkout.bind(this)}
                />
           <Footer />
         </div>

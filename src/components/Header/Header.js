@@ -2,7 +2,7 @@ import './Header.css';
 
 import React from 'react';
 
-export function Header(props, context) {
+export default function Header(props) {
 
   return (
     <header className="header" role="banner" aria-label="Primary navigation">
@@ -14,5 +14,3 @@ export function Header(props, context) {
     </header>
   );
 }
-
-export default Header;

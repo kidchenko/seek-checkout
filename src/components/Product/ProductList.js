@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import ProductListHeader from './ProductListHeader';
 import ProductListItem from './ProductListItem';
@@ -26,4 +27,9 @@ export default class ProductList extends Component {
             onAddToCart={this.props.onAddToCart.bind(this)} />
     );
   }
+}
+
+ProductList.propTypes = {
+  products: PropTypes.array,
+  onAddToCart: PropTypes.func
 }

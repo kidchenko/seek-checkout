@@ -2,7 +2,7 @@ import './Footer.css';
 
 import React from 'react';
 
-export function Footer() {
+export default function Footer() {
   return (
     <footer className="footer" aria-labelledby="footer-name" role="contentinfo">
       <p id="footer-name">
@@ -14,5 +14,3 @@ export function Footer() {
     </footer>
   );
 }
-
-export default Footer;

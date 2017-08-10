@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 export default class ProductListItem extends Component {
 
@@ -15,4 +16,14 @@ export default class ProductListItem extends Component {
       </tr>
     )
   }
+}
+
+ProductListItem.propTypes = {
+  product: PropTypes.shape({
+    id: PropTypes.string,
+    name: PropTypes.string,
+    description: PropTypes.string,
+    price: PropTypes.number
+  }),
+  onAddToCart: PropTypes.func
 }

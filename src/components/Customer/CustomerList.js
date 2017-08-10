@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import CustomerListItem from './CustomerListItem';
 
@@ -22,4 +23,9 @@ export default class CustomertList extends Component {
       </select>
     );
   }
+}
+
+CustomertList.propTypes = {
+  customers: PropTypes.array,
+  onSelectCustomer: PropTypes.func
 }
