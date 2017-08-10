@@ -1,4 +1,4 @@
-export default {
+const auth = {
   isAuthenticated: false,
   authenticate(cb) {
     this.isAuthenticated = true
@@ -9,3 +9,5 @@ export default {
     setTimeout(cb, 100)
   }
 }
+
+export default auth;

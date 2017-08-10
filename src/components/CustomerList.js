@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import fakeAuth from './FakeAuth';
+import fakeAuth from './Header/FakeAuth';
 import { Redirect } from 'react-router-dom'
 
 const customers = [
