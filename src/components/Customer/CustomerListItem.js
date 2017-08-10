@@ -1,13 +1,10 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
-export default class CustomerListItem extends Component {
-
-  render() {
-    return (
-      <option value={this.props.customer.name}>{this.props.customer.name}</option>
+export function CustomerListItem(props){
+  return (
+      <option value={props.customer.name}>{props.customer.name}</option>
     )
-  }
 }
 
 CustomerListItem.propTypes = {
@@ -15,3 +12,5 @@ CustomerListItem.propTypes = {
     name: PropTypes.string.isRequired
   }).isRequired
 };
+
+export default CustomerListItem;
