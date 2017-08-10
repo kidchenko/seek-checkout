@@ -2,17 +2,20 @@ import React, { Component } from 'react';
 
 import CustomerListItem from './CustomerListItem';
 
-class CustomertList extends Component {
+export default class CustomertList extends Component {
 
   renderCustomers() {
-    return this.props.customers.map((customer, i) => {
-      return <CustomerListItem key={i} customer={customer} />
-    })
+    return this.props.customers.map((customer, i) =>
+        <CustomerListItem key={i} customer={customer} />)
+  }
+
+  handleChange() {
+    this.props.onSelectCustomer(this.refs.customerList.value);
   }
 
   render() {
     return (
-      <select>
+      <select onChange={this.handleChange.bind(this)} ref="customerList">
       {
         this.renderCustomers()
       }
@@ -20,5 +23,3 @@ class CustomertList extends Component {
     );
   }
 }
-
-export default CustomertList;

@@ -1,28 +1,58 @@
 import './App.css';
 
 import React, { Component } from 'react';
+import _ from 'lodash';
 
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
-import AdsList from './components/AdsList';
-import SelectCustomerForm from './components/Customer/SelectCustomerForm';
+import CustomerSelector from './components/Customer/CustomerSelector';
+import ProductList from './components/Product/ProductList';
+import CheckoutForm from './components/Checkout/CheckoutForm';
 
-class App extends Component {
+import { products } from './models/product';
+import { customers } from './models/customer';
+import Checkout from './models/checkout';
 
-  handlerSelectCustomer() {
-    console.log('select customer')
+export default class App extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      customer : customers[0],
+      cart: new Checkout()
+    }
+  }
+
+  selectCustomer(customer) {
+    console.log('app customerChanged', customer);
+    this.setState({
+      customer : _.find(customers, { name : customer }),
+      cart : new Checkout()
+    })
+  }
+
+  addToCart(product) {
+    this.setState({
+      cart : this.state.cart.add(product)
+    });
   }
 
   render() {
     return (
         <div>
           <Header />
-          <SelectCustomerForm />
-          <AdsList />
+          <CustomerSelector
+              customers={customers}
+              onSelectCustomer={this.selectCustomer.bind(this)} />
+          <ProductList
+              products={products}
+              onAddToCart={this.addToCart.bind(this)} />
+          <CheckoutForm
+              itens={this.state.cart.getItens()}
+              total={this.state.cart.total()}
+               />
           <Footer />
         </div>
     );
   }
 }
-
-export default App;

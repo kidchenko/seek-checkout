@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 export function CustomerListItem(props){
   return (
-      <option value={props.customer.name}>{props.customer.name}</option>
+      <option value={props.customer.value}>{props.customer.name}</option>
     )
 }
 
