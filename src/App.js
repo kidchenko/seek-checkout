@@ -28,7 +28,7 @@ export default class App extends Component {
     const customer = _.find(customers, { name : customerName });
     this.setState({
       customer,
-      cart : new Checkout(this.state.customer.rules)
+      cart : new Checkout(customer.rules)
     })
   }
 
@@ -41,7 +41,7 @@ export default class App extends Component {
   checkout() {
     alert(`You paid ${this.state.cart.total()}`)
     this.setState({
-      cart: new Checkout()
+      cart: new Checkout(this.state.customer.rules)
     });
   }
 

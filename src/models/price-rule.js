@@ -4,26 +4,26 @@ const QUANTITY_DEAL_ID = 'deal';
 const DISCOUNT_ID = 'discount';
 const DISCOUNT_MORE_THAN_ID = 'discount_more_than';
 
-const ruleData = {
-  unilever: {
-    applyOn: CLASSIC_ID,
-    match: (a ) => a.id === this.applyOn,
-    ruleField: 'quantity',
-    apply: (quantity, factor) => Math.floor((quantity / factor)),
-  },
-  apple: {
-    applyOn: STANDOUT_ID,
-    match: (a) => a.id === this.applyOn,
-    ruleField: 'price',
-    apply: (a) => a,
-  },
-  nike: {
-    applyOn: PREMIUM_ID,
-    match: (a, quantity, moreThan) => (quantity > moreThan) && a.id === this.applyOn,
-    ruleField: 'price',
-    apply: (a) => a
-  }
-}
+// const ruleData = {
+//   unilever: {
+//     applyOn: CLASSIC_ID,
+//     match: (a ) => a.id === this.applyOn,
+//     ruleField: 'quantity',
+//     apply: (quantity, factor) => Math.floor((quantity / factor)),
+//   },
+//   apple: {
+//     applyOn: STANDOUT_ID,
+//     match: (a) => a.id === this.applyOn,
+//     ruleField: 'price',
+//     apply: (a) => a,
+//   },
+//   nike: {
+//     applyOn: PREMIUM_ID,
+//     match: (a, quantity, moreThan) => (quantity > moreThan) && a.id === this.applyOn,
+//     ruleField: 'price',
+//     apply: (a) => a
+//   }
+// }
 
 class QuantityDealRule {
 
