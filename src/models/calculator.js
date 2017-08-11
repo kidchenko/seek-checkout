@@ -28,8 +28,10 @@ class QuantityDealCalculator {
   calculate() {
 
     const matchProducts = this.itens.filter(this.getProductsByType)
-
     this.calculator.itens = _.difference(this.itens, matchProducts);
+
+    console.log(matchProducts.length)
+    if (matchProducts.length === 0) return this.calculator.calculate() + 0;
 
     const freeItens = Math.floor((matchProducts.length / this.originalQtd));
 

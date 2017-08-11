@@ -42,27 +42,6 @@ class PriceDiscountRule {
     this.newPrice = newPrice;
     this.adsType = adsType;
   }
-
-  // calculate(itens) {
-
-  //   let byType = itens.filter((e, i) => {
-  //     return e.id === this.adsType;
-  //   });
-
-  //   let notType = itens.filter((e, i) => {
-  //     return e.id !== this.adsType;
-  //   });
-
-  //   let subTotal = notType.reduce((before, current) => {
-  //     return before + current.price;
-  //   }, 0);
-
-  //   let total = byType.reduce((before, current) => {
-  //     return before + this.newPrice;
-  //   }, subTotal);
-
-  //   return total;
-  // }
 }
 
 class PriceDiscountByQuantityRule {
@@ -73,31 +52,6 @@ class PriceDiscountByQuantityRule {
     this.adsType = adsType;
     this.minimumQuantity = minimumQuantity;
   }
-
-  // calculate(itens) {
-
-  //   let byType = itens.filter((e, i) => {
-  //     return e.id === this.adsType;
-  //   });
-
-  //   let notType = itens.filter((e, i) => {
-  //     return e.id !== this.adsType;
-  //   });
-
-  //   let subTotal = notType.reduce((before, current) => {
-  //     return before + current.price;
-  //   }, 0);
-
-  //   // if premium ads quantity > minimum use discountPrice
-  //   if (byType.length >= this.minimumQuantity) {
-  //     return byType.reduce((before, current) => {
-  //       return before + this.newPrice;
-  //     }, subTotal);
-  //   }
-  //   return byType.reduce((before, current) => {
-  //     return before + current.price;
-  //   }, subTotal);
-  // }
 }
 
 

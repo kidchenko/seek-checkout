@@ -53,6 +53,16 @@ describe('Customer: UNILEVER', () => {
     expect(co.total()).toBe(1869.94);
   });
 
+  it('should apply 5 for 4 deal on Classic Ads', () => {
+    let co = new Checkout([new QuantityDealRule(5, 4, classic.id)]);
+    co.add(classic);
+    co.add(classic);
+    co.add(classic);
+    co.add(classic);
+    co.add(classic);
+    expect(co.total()).toBe(1079.96);
+  });
+
   it('should pay for 2x classic, 2x standout and 2x premium without discount', () => {
     let co = new Checkout([new QuantityDealRule(3, 2, classic.id)]);
     co.add(classic);

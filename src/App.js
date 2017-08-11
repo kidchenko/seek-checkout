@@ -19,15 +19,16 @@ export default class App extends Component {
     super(props);
     this.state = {
       customer : customers[0],
-      cart: new Checkout()
+      cart: new Checkout(customers[0].rules)
     }
   }
 
-  selectCustomer(customer) {
-    console.log('app customerChanged', customer);
+  selectCustomer(customerName) {
+    console.log('app customerChanged', customerName);
+    const customer = _.find(customers, { name : customerName });
     this.setState({
-      customer : _.find(customers, { name : customer }),
-      cart : new Checkout()
+      customer,
+      cart : new Checkout(this.state.customer.rules)
     })
   }
 
