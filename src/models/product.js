@@ -29,5 +29,8 @@ export {
   CLASSIC_ID,
   STANDOUT_ID,
   PREMIUM_ID,
+  classic,
+  standout,
+  premium,
   products
 };
