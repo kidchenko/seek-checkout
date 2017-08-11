@@ -9,7 +9,6 @@ class DefaultCalculator {
   calculate() {
     if (!this.itens || this.itens.length === 0) return 0;
     const total = this.itens.reduce((before, acc) => before + acc.price, 0);
-    console.log('DefaultCalculator', total);
     return total;
   }
 }
@@ -21,24 +20,24 @@ class QuantityDealCalculator {
     this.itens = itens;
     this.originalQtd = rule.originalQtd;
     this.newQtd = rule.newQtd;
-    this.adsType = rule.adsType;
+    this.productType = rule.adsType;
   }
+
+  getProductsByType = (product) => product.id === this.productType;
 
   calculate() {
 
-    //count itens per type
-    let byType = this.itens.filter((e, i) => {
-      return e.id === this.adsType;
-    });
+    const matchProducts = this.itens.filter(this.getProductsByType)
 
-    this.calculator.itens = _.difference(this.itens, byType);
+    this.calculator.itens = _.difference(this.itens, matchProducts);
 
-    //get discount qtd
-    let qtd = Math.floor((byType.length / this.originalQtd));
+    const freeItens = Math.floor((matchProducts.length / this.originalQtd));
 
-    let total = (byType.length - qtd) * byType[0].price;
+    const billedQtd = matchProducts.length - freeItens;
 
-    console.log('QuantityDealCalculator', total)
+    const total = billedQtd  * matchProducts[0].price;
+
+    console.log(`QuantityDealCalculator - total: ${total}, free: ${freeItens}`);
 
     return this.calculator.calculate() + total;
   }
@@ -50,20 +49,21 @@ class PriceDiscountCalculator {
     this.calculator = calculator;
     this.itens = itens;
     this.newPrice = rule.newPrice;
-    this.adsType = rule.adsType;
+    this.productType = rule.adsType;
   }
+
+  getProductsByType = (product) => product.id === this.productType;
+
+  sumProducts = (before, current) => before + this.newPrice;
 
   calculate() {
 
-    let byType = this.itens.filter((e, i) => e.id === this.adsType);
+    const matchProducts = this.itens.filter(this.getProductsByType);
+    this.calculator.itens = _.difference(this.itens, matchProducts);
 
-    this.calculator.itens = _.difference(this.itens, byType);
+    const total = matchProducts.reduce(this.sumProducts,0);
 
-    let total = byType.reduce((before, current) => {
-      return before + this.newPrice;
-    }, 0);
-
-    console.log('PriceDiscountByQuantityRule', total)
+    console.log(`PriceDiscountCalculator - total: ${total}, price: ${this.newPrice}`);
 
     return this.calculator.calculate() + total;
   }
@@ -75,28 +75,32 @@ class PriceDiscountByQuantityCalculator {
     this.calculator = calculator;
     this.itens = itens;
     this.newPrice = rule.newPrice;
-    this.adsType = rule.adsType;
+    this.productType = rule.adsType;
     this.minimumQuantity = rule.minimumQuantity;
   }
 
+  getProductsByType = (product) => product.id === this.productType;
+
+  matchRule = (matchProducts) => matchProducts.length >= this.minimumQuantity;
+
+  sumUsingNewPrice = (before, current) => before + this.newPrice;
+
+  sumUsingCurrentPrice = (before, current) => before + current.price;
+
   calculate() {
 
-    let byType = this.itens.filter((e, i) => e.id === this.adsType);
-    this.calculator.itens = _.difference(this.itens, byType);
+    const matchProducts = this.itens.filter(this.getProductsByType);
+    this.calculator.itens = _.difference(this.itens, matchProducts);
 
     let total = 0;
 
-    if (byType.length >= this.minimumQuantity) {
-      total = byType.reduce((before, current) => {
-        return before + this.newPrice;
-      }, total);
+    if (this.matchRule(matchProducts)) {
+      total = matchProducts.reduce(this.sumUsingNewPrice, total);
+      console.log(`PriceDiscountByQuantityCalculator - total: ${total}, match rule and new price: ${this.newPrice}`);
     } else {
-      total = byType.reduce((before, current) => {
-      return before + current.price;
-      }, total);
+      console.log(`PriceDiscountByQuantityCalculator - total: ${total}, not match rule`);
+      total = matchProducts.reduce(this.sumUsingCurrentPrice, total);
     }
-
-    console.log('PriceDiscountByQuantityRule', total)
 
     return this.calculator.calculate() + total;
   }
