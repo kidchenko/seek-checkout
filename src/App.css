@@ -1,11 +1,12 @@
-html, body {
-  height: 100%;
-}
-
-
-#container {
+.container {
   max-width: 980px;
   width: 100%;
   padding: 15px;
   margin: 0 auto;
+}
+
+.wrap {
+  height: 100%;
+  min-height:100%;
+  position:relative;
 }

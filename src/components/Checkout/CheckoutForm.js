@@ -7,16 +7,16 @@ export default class CheckoutForm extends Component {
 
   render() {
     return (
-      <div>
-        <h4>Itens in cart:</h4>
+      <section aria-labelledby="checkout-title">
+        <h1 id="checkout-title">Itens in cart:</h1>
         <CheckoutItemGroup
             itens={this.props.itens}
             groupBy="id" />
         <p>Total: USD {this.props.total}</p>
-        <button onClick={this.props.onCheckout.bind(this)}>
+        <button className="button" onClick={this.props.onCheckout.bind(this)}>
           Pay now
         </button>
-      </div>
+      </section>
     );
   }
 }

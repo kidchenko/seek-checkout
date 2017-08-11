@@ -45,23 +45,32 @@ export default class App extends Component {
     });
   }
 
+  renderCheckoutForm() {
+    if (this.state.cart.getItens().length === 0) return null;
+    return <CheckoutForm
+                itens={this.state.cart.getItens()}
+                total={this.state.cart.total()}
+                onCheckout={this.checkout.bind(this)}
+                />
+  }
+
   render() {
     return (
-        <div>
+        <article className="wrap">
           <Header />
-          <CustomerSelector
-              customers={customers}
-              onSelectCustomer={this.selectCustomer.bind(this)} />
-          <ProductList
-              products={products}
-              onAddToCart={this.addToCart.bind(this)} />
-          <CheckoutForm
-              itens={this.state.cart.getItens()}
-              total={this.state.cart.total()}
-              onCheckout={this.checkout.bind(this)}
-               />
+          <main role="main" className="container">
+            <CustomerSelector
+                customers={customers}
+                onSelectCustomer={this.selectCustomer.bind(this)} />
+            <ProductList
+                products={products}
+                onAddToCart={this.addToCart.bind(this)} />
+            {
+              this.renderCheckoutForm()
+            }
+          </main>
           <Footer />
-        </div>
+        </article>
     );
   }
 }

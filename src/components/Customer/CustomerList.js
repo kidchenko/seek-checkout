@@ -16,7 +16,7 @@ export default class CustomertList extends Component {
 
   render() {
     return (
-      <select onChange={this.handleChange.bind(this)} ref="customerList">
+      <select id="customer-list" onChange={this.handleChange.bind(this)} ref="customerList">
       {
         this.renderCustomers()
       }

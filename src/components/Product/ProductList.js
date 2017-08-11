@@ -1,3 +1,5 @@
+import './ProductList.css';
+
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
@@ -8,14 +10,17 @@ export default class ProductList extends Component {
 
   render() {
     return (
-      <table>
-        <ProductListHeader />
-        <tbody>
-        {
-          this.renderItems()
-        }
-        </tbody>
-      </table>
+      <section aria-labelledby="product-list-title">
+        <h1 id="product-list-title">Select your product:</h1>
+        <table className="product-list">
+          <ProductListHeader />
+          <tbody>
+          {
+            this.renderItems()
+          }
+          </tbody>
+        </table>
+      </section>
     );
   }
 

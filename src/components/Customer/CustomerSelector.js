@@ -1,3 +1,5 @@
+import './CustomerSelector.css';
+
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
@@ -7,12 +9,12 @@ export default class CustomerSelector extends Component {
 
   render() {
     return (
-      <div>
-        <h1>Hello recruiter! Select the customer:</h1>
+      <section aria-labelledby="customer-selector-title">
+        <h1 id="customer-selector-title">Hello recruiter! Select the customer:</h1>
         <CustomertList
             customers={this.props.customers}
             onSelectCustomer={this.props.onSelectCustomer.bind(this)} />
-      </div>
+      </section>
     );
   }
 }

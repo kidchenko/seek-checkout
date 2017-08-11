@@ -5,7 +5,7 @@ import React from 'react';
 export default function Header(props) {
 
   return (
-    <header className="header" role="banner" aria-label="Primary navigation">
+    <header className="header" role="banner" aria-label="Seek Header">
       <div className="content">
         <h1 className="site-title">
           SEEK
