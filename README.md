@@ -1,41 +1,53 @@
 # SEEK Coding Exercise
 
-**I could not finish and I would need more time.**
+This is my solution para the SEKK coding exercise.
+
+## Images & Live Demo
+
+You can see a live demo [here](https://seek-checkout.herokuapp.com/).
+
+<img  src="./print1.png">
+
+## Todo
+- Refactor `calculator`;
+- Create a more dynamic model `./model/price-rule.js` and `./model/checkout.js`;
+- Create tests to `react` components;
+- Remove `createCalculator()` from `total()` in `./model/checkout.js`;
+- Review mobile design;
+
+
+
+Coding activity: 34h [powered by wakatime](https://wakatime.com/i/kidchenko).
+
+Cups of coffee: 14.
+
+<img  src="./coding-activity.png">
 
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
-Coding Activity: 19h
 
-Cups of coffee: 10
 
 ## What I learned in this exercise:
-- React <3
-- Use react-router;
+- React <3;
 - I really could have use the time of a more efficient manner;
+- Some patterns in JS, I decided to apply `decorator` pattern to calculate the `checkout price `;
+- ~~Use react-router (Removed to simplify)~~;
 - ~~Redux (I studied a lot, but I didn't implement)~~
 
-
 ## My pain points
-- I could not deliver a satisfactory version, I did not use time efficiently and I chose a path not so good for me;
-- I am not fluent in React, so I think that this is one of the principal pain point, it consumed a lot of time because I was frozen at various times. But I'm not regret I learned a lot;
-- The cart rule is broken, I really tried my best, but I took a beating of FORD rule :c
-- Yeah, I know that the code is not clear and I am doing a lot of mess with reactjs... I know that I should not handle the events in the components, it is a just a start code, but I didn't had time of move to parent components.
+- I think that I delivered a functional first version, it is not completely satisfactory version but works,
+- I did not use time efficiently and I chose a path not so good for me and I was frozen for a long time;
+- I am not fluent in React, so I think that this is one of the principal pain point, it consumed a lot of time because I was frozen at various times. But I'm not regret I learned a lot and think that I delivered a good react app;
+- The cart rule is working, I really tried my best, but I have some points to improve;
 
 
 <img src="exercise-and-me.gif" />
-The exercise and me!
-
+Reactjs and me! :)
 
 ## Running in your machine
 
 - `npm install` to install dependencies
 - `npm start` to start
-
-## Images
-
-<img  src="./print1.png">
-
-<img  src="./print2.png">
 
 ## Available Scripts
 
