@@ -1,6 +1,16 @@
+import {
+  DefaultCalculator
+  , QuantityDealCalculator
+  , PriceDiscountCalculator
+  , PriceDiscountByQuantityCalculator
+  , NewCalculator
+} from './calculator';
+
 const QUANTITY_DEAL_ID = 'deal';
 const DISCOUNT_ID = 'discount';
 const DISCOUNT_MORE_THAN_ID = 'discount_more_than';
+const NEW_RULE_NEW_CALCULATOR = 'new_rule_new_calculator';
+const OTHER_RULE_OLD_CALCULATOR = 'new_rule_old_calculator';
 
 // const ruleData = {
 //   unilever: {
@@ -31,6 +41,11 @@ class QuantityDealRule {
     this.newQtd = newQtd;
     this.adsType = adsType;
   }
+
+  getCalculator(calculator, itens) {
+    calculator = calculator || new DefaultCalculator(itens);
+    return new QuantityDealCalculator(calculator, itens, this);
+  }
 }
 
 class PriceDiscountRule {
@@ -39,6 +54,11 @@ class PriceDiscountRule {
     this.id = DISCOUNT_ID;
     this.newPrice = newPrice;
     this.adsType = adsType;
+  }
+
+  getCalculator(calculator, itens) {
+    calculator = calculator || new DefaultCalculator(itens);
+    return new PriceDiscountCalculator(calculator, itens, this);
   }
 }
 
@@ -50,6 +70,36 @@ class PriceDiscountByQuantityRule {
     this.adsType = adsType;
     this.minimumQuantity = minimumQuantity;
   }
+
+  getCalculator(calculator, itens) {
+    calculator = calculator || new DefaultCalculator(itens);
+    return new PriceDiscountByQuantityCalculator(calculator, itens, this);
+  }
+}
+
+class NewRule {
+
+  id = NEW_RULE_NEW_CALCULATOR;
+
+  getCalculator(calculator, itens) {
+    calculator = calculator || new DefaultCalculator(itens);
+    return new NewCalculator(calculator, itens);
+  }
+}
+
+class OtherRule {
+
+  constructor(originalQtd, newQtd, adsType) {
+    this.id = OTHER_RULE_OLD_CALCULATOR;
+    this.originalQtd = originalQtd;
+    this.newQtd = newQtd;
+    this.adsType = adsType;
+  }
+
+  getCalculator(calculator, itens) {
+    calculator = calculator || new DefaultCalculator(itens);
+    return new QuantityDealCalculator(calculator, itens, this);
+  }
 }
 
 
@@ -57,6 +107,8 @@ export {
   QuantityDealRule,
   PriceDiscountRule,
   PriceDiscountByQuantityRule,
+  NewRule,
+  OtherRule,
   QUANTITY_DEAL_ID,
   DISCOUNT_ID,
   DISCOUNT_MORE_THAN_ID

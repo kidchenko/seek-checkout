@@ -12,20 +12,12 @@ export default class Checkout {
   }
 
   createCalculator() {
-    let itensToCalculate = _.cloneDeep(this.itens);
+    const itensToCalculate = _.cloneDeep(this.itens);
     this.calculator = new DefaultCalculator(itensToCalculate);
-    let dealRule = _.find(this.rules, { id : QUANTITY_DEAL_ID });
-    let priceRule = _.find(this.rules, { id : DISCOUNT_ID });
-    let priceRuleWhen = _.find(this.rules, { id : DISCOUNT_MORE_THAN_ID });
-    if (dealRule) {
-      this.calculator = new QuantityDealCalculator(this.calculator, itensToCalculate, dealRule);
-    }
-    if (priceRule) {
-      this.calculator = new PriceDiscountCalculator(this.calculator, itensToCalculate, priceRule);
-    }
-    if (priceRuleWhen) {
-      this.calculator = new PriceDiscountByQuantityCalculator(this.calculator, itensToCalculate, priceRuleWhen);
-    }
+
+    this.rules.forEach((rule) => {
+      this.calculator = rule.getCalculator(this.calculator, itensToCalculate);
+    });
   }
 
   add(item) {

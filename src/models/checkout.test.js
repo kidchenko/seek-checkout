@@ -1,6 +1,12 @@
 import Checkout from './checkout'
 import { classic, standout, premium } from './product';
-import { QuantityDealRule, PriceDiscountRule, PriceDiscountByQuantityRule } from './price-rule';
+import {
+  QuantityDealRule
+  , PriceDiscountRule
+  , PriceDiscountByQuantityRule
+  , NewRule
+  , OtherRule
+   } from './price-rule';
 
 it('can create Checkout', () => {
   let co = new Checkout();
@@ -171,5 +177,39 @@ describe('Customer: FORD', () => {
   })
 });
 
+describe('New Client: using NewRule', () => {
 
+    it('should pay 1 by item', () => {
+      let co = new Checkout([new NewRule()]);
+      co.add(classic);
+      co.add(standout);
+      co.add(premium);
+      expect(co.total()).toBe(3);
+    });
 
+    it('should pay for 2x classic, 2x standout and 2x premium without discount', () => {
+      let co = new Checkout([new NewRule()]);
+      co.add(classic);
+      co.add(classic);
+      co.add(standout);
+      co.add(standout);
+      co.add(premium);
+      co.add(premium);
+      expect(co.total()).toBe(6);
+    });
+  });
+
+describe('Other New Client: using OtherRule', () => {
+
+  it('should pay 1 by item', () => {
+    let co = new Checkout([
+        new NewRule(),
+        new OtherRule(3, 2, classic.id),
+      ]);
+    co.add(classic);
+    co.add(classic);
+    co.add(classic);
+    co.add(premium);
+    expect(co.total()).toBe(540.98);
+  });
+});

@@ -108,10 +108,23 @@ class PriceDiscountByQuantityCalculator {
   }
 }
 
+class NewCalculator {
+
+  constructor(calculator, itens) {
+    this.calculator = calculator;
+    this.itens = itens;
+  }
+
+  calculate() {
+    return this.itens.length;
+  }
+}
+
 
 export {
   DefaultCalculator,
   QuantityDealCalculator,
   PriceDiscountCalculator,
-  PriceDiscountByQuantityCalculator
+  PriceDiscountByQuantityCalculator,
+  NewCalculator
 }
