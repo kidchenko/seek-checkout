@@ -46,13 +46,15 @@ export default class App extends Component {
   }
 
   renderCheckoutForm() {
-    if (this.state.cart.getItens().length === 0) return null;
+    if (this.state.cart.getItens().length === 0) return;
     return <CheckoutForm
                 itens={this.state.cart.getItens()}
                 total={this.state.cart.total()}
                 onCheckout={this.checkout.bind(this)}
                 />
   }
+
+
 
   render() {
     return (
@@ -63,8 +65,8 @@ export default class App extends Component {
                 customers={customers}
                 onSelectCustomer={this.selectCustomer.bind(this)} />
             <ProductList
-                products={products}
-                onAddToCart={this.addToCart.bind(this)} />
+              products={products}
+              onAddToCart={this.addToCart.bind(this)} />
             {
               this.renderCheckoutForm()
             }
