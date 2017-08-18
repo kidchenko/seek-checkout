@@ -54,13 +54,11 @@ export default class App extends Component {
                 />
   }
 
-
-
   render() {
     return (
-        <article className="wrap">
+        <article id="body">
           <Header />
-          <main role="main" className="container">
+          <main role="main">
             <CustomerSelector
                 customers={customers}
                 onSelectCustomer={this.selectCustomer.bind(this)} />

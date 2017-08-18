@@ -1,8 +1,29 @@
+.table-responsive {
+  display: block;
+  width: 100%;
+  overflow-x: auto;
+}
+
 .product-list {
     border-collapse: collapse;
+    width: 100%;
     border-spacing: 0;
     empty-cells: show;
     border: 1px solid #cbcbcb;
+    box-sizing: border-box;
+}
+
+.product-list thead {
+  background-color: #e0e0e0;
+  color: #000;
+  text-align: left;
+  vertical-align: bottom;
+  box-sizing: border-box;
+}
+
+.product-list tr {
+  box-sizing: border-box;
+  width: 100%
 }
 
 .product-list td,
@@ -14,20 +35,13 @@
     overflow: visible;
     padding: .3em .3em;
     border-bottom: 1px solid #cbcbcb;
+    box-sizing: border-box;
 }
 
 .product-list td:first-child,
 .product-list th:first-child {
     border-left-width: 0;
 }
-
-.product-list thead {
-    background-color: #e0e0e0;
-    color: #000;
-    text-align: left;
-    vertical-align: bottom;
-}
-
 .product-list tbody > tr:last-child > td {
     border-bottom-width: 0;
 }
