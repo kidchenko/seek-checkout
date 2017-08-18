@@ -9,7 +9,7 @@ export default function Footer() {
         Created with &lt;3 by <a href="https://www.google.com.br/search?q=@kidchenko" target="_blank" rel="noopener noreferrer">@kidchenko</a> - 2017
       </p>
       <p>
-        Sorry, but I am not fluent in reactjs :c
+        I have learned a lot building this app
       </p>
     </footer>
   );

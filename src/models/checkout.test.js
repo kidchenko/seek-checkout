@@ -134,7 +134,6 @@ describe('Customer: NIKE', () => {
     co.add(classic);
     expect(co.total()).toBe(1919.96);
   });
-
 });
 
 describe('Customer: FORD', () => {

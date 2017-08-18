@@ -1,6 +1,5 @@
 import _ from 'lodash';
-import { DefaultCalculator, QuantityDealCalculator, PriceDiscountCalculator, PriceDiscountByQuantityCalculator } from './calculator';
-import { QUANTITY_DEAL_ID, DISCOUNT_ID, DISCOUNT_MORE_THAN_ID } from './price-rule';
+import { DefaultCalculator } from './calculator';
 
 export default class Checkout {
 
