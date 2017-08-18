@@ -121,6 +121,20 @@ describe('Customer: NIKE', () => {
     expect(co.total()).toBe(1184.97);
   });
 
+  it('should accpet 2 rules of the same type', () => {
+    let co = new Checkout([
+      new PriceDiscountByQuantityRule(379.99, 4, premium.id),
+      new PriceDiscountByQuantityRule(200, 2, classic.id)
+    ]);
+    co.add(premium);
+    co.add(premium);
+    co.add(premium);
+    co.add(premium);
+    co.add(classic);
+    co.add(classic);
+    expect(co.total()).toBe(1919.96);
+  });
+
 });
 
 describe('Customer: FORD', () => {
