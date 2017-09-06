@@ -1,7 +1,6 @@
-import _ from 'lodash';
+import _ from "lodash";
 
 class DefaultCalculator {
-
   constructor(itens) {
     this.itens = itens;
   }
@@ -14,7 +13,6 @@ class DefaultCalculator {
 }
 
 class QuantityDealCalculator {
-
   constructor(calculator, itens, rule) {
     this.calculator = calculator;
     this.itens = itens;
@@ -23,21 +21,22 @@ class QuantityDealCalculator {
     this.productType = rule.adsType;
   }
 
-  getProductsByType = (product) => product.id === this.productType;
+  getProductsByType(product) {
+    return product.id === this.productType;
+  }
 
   calculate() {
-
-    const matchProducts = this.itens.filter(this.getProductsByType)
+    const matchProducts = this.itens.filter(this.getProductsByType);
     this.calculator.itens = _.difference(this.itens, matchProducts);
 
-    console.log(matchProducts.length)
+    console.log(matchProducts.length);
     if (matchProducts.length === 0) return this.calculator.calculate() + 0;
 
-    const freeItens = Math.floor((matchProducts.length / this.originalQtd));
+    const freeItens = Math.floor(matchProducts.length / this.originalQtd);
 
     const billedQtd = matchProducts.length - freeItens;
 
-    const total = billedQtd  * matchProducts[0].price;
+    const total = billedQtd * matchProducts[0].price;
 
     console.log(`QuantityDealCalculator - total: ${total}, free: ${freeItens}`);
 
@@ -46,7 +45,6 @@ class QuantityDealCalculator {
 }
 
 class PriceDiscountCalculator {
-
   constructor(calculator, itens, rule) {
     this.calculator = calculator;
     this.itens = itens;
@@ -54,25 +52,29 @@ class PriceDiscountCalculator {
     this.productType = rule.adsType;
   }
 
-  getProductsByType = (product) => product.id === this.productType;
+  getProductsByType(product) {
+    return product.id === this.productType;
+  }
 
-  sumProducts = (before, current) => before + this.newPrice;
+  sumProducts(before, current) {
+    return before + this.newPrice;
+  }
 
   calculate() {
-
     const matchProducts = this.itens.filter(this.getProductsByType);
     this.calculator.itens = _.difference(this.itens, matchProducts);
 
-    const total = matchProducts.reduce(this.sumProducts,0);
+    const total = matchProducts.reduce(this.sumProducts, 0);
 
-    console.log(`PriceDiscountCalculator - total: ${total}, price: ${this.newPrice}`);
+    console.log(
+      `PriceDiscountCalculator - total: ${total}, price: ${this.newPrice}`
+    );
 
     return this.calculator.calculate() + total;
   }
 }
 
 class PriceDiscountByQuantityCalculator {
-
   constructor(calculator, itens, rule) {
     this.calculator = calculator;
     this.itens = itens;
@@ -81,16 +83,23 @@ class PriceDiscountByQuantityCalculator {
     this.minimumQuantity = rule.minimumQuantity;
   }
 
-  getProductsByType = (product) => product.id === this.productType;
+  getProductsByType(product) {
+    return product.id === this.productType;
+  }
 
-  matchRule = (matchProducts) => matchProducts.length >= this.minimumQuantity;
+  matchRule(matchProducts) {
+    return matchProducts.length >= this.minimumQuantity;
+  }
 
-  sumUsingNewPrice = (before, current) => before + this.newPrice;
+  sumUsingNewPrice(before, current) {
+    return before + this.newPrice;
+  }
 
-  sumUsingCurrentPrice = (before, current) => before + current.price;
+  sumUsingCurrentPrice(before, current) {
+    return before + current.price;
+  }
 
   calculate() {
-
     const matchProducts = this.itens.filter(this.getProductsByType);
     this.calculator.itens = _.difference(this.itens, matchProducts);
 
@@ -98,9 +107,14 @@ class PriceDiscountByQuantityCalculator {
 
     if (this.matchRule(matchProducts)) {
       total = matchProducts.reduce(this.sumUsingNewPrice, total);
-      console.log(`PriceDiscountByQuantityCalculator - total: ${total}, match rule and new price: ${this.newPrice}`);
+      console.log(
+        `PriceDiscountByQuantityCalculator - total: ${total}, match rule and new price: ${this
+          .newPrice}`
+      );
     } else {
-      console.log(`PriceDiscountByQuantityCalculator - total: ${total}, not match rule`);
+      console.log(
+        `PriceDiscountByQuantityCalculator - total: ${total}, not match rule`
+      );
       total = matchProducts.reduce(this.sumUsingCurrentPrice, total);
     }
 
@@ -109,7 +123,6 @@ class PriceDiscountByQuantityCalculator {
 }
 
 class NewCalculator {
-
   constructor(calculator, itens) {
     this.calculator = calculator;
     this.itens = itens;
@@ -120,11 +133,10 @@ class NewCalculator {
   }
 }
 
-
 export {
   DefaultCalculator,
   QuantityDealCalculator,
   PriceDiscountCalculator,
   PriceDiscountByQuantityCalculator,
   NewCalculator
-}
+};
