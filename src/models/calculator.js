@@ -26,10 +26,9 @@ class QuantityDealCalculator {
   }
 
   calculate() {
-    const matchProducts = this.itens.filter(this.getProductsByType);
+    const matchProducts = this.itens.filter(p => this.getProductsByType(p));
     this.calculator.itens = _.difference(this.itens, matchProducts);
 
-    console.log(matchProducts.length);
     if (matchProducts.length === 0) return this.calculator.calculate() + 0;
 
     const freeItens = Math.floor(matchProducts.length / this.originalQtd);
@@ -61,10 +60,13 @@ class PriceDiscountCalculator {
   }
 
   calculate() {
-    const matchProducts = this.itens.filter(this.getProductsByType);
+    const matchProducts = this.itens.filter(p => this.getProductsByType(p));
     this.calculator.itens = _.difference(this.itens, matchProducts);
 
-    const total = matchProducts.reduce(this.sumProducts, 0);
+    const total = matchProducts.reduce(
+      (before, current) => this.sumProducts(before, current),
+      0
+    );
 
     console.log(
       `PriceDiscountCalculator - total: ${total}, price: ${this.newPrice}`
@@ -83,7 +85,7 @@ class PriceDiscountByQuantityCalculator {
     this.minimumQuantity = rule.minimumQuantity;
   }
 
-  getProductsByType(product) {
+  getItensByType(product) {
     return product.id === this.productType;
   }
 
@@ -100,7 +102,7 @@ class PriceDiscountByQuantityCalculator {
   }
 
   calculate() {
-    const matchProducts = this.itens.filter(this.getProductsByType);
+    const matchProducts = this.itens.filter(p => this.getItensByType(p));
     this.calculator.itens = _.difference(this.itens, matchProducts);
 
     let total = 0;

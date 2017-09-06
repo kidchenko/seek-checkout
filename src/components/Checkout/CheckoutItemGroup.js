@@ -6,8 +6,8 @@ import CheckoutItem from "./CheckoutItem";
 
 export default class CheckoutItemGroup extends Component {
   renderGroupedItens() {
-    const grouped = _.groupBy(this.props.itens, this.props.groupBy);
-    return _.map(grouped, (value, key) => (
+    const groupBy = _.groupBy(this.props.itens, this.props.groupBy);
+    return _.map(groupBy, (value, key) => (
       <CheckoutItem key={key} quantity={value.length} {...value[0]} />
     ));
   }
