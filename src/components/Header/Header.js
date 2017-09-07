@@ -1,16 +1,30 @@
-import './Header.css';
+import React from "react";
+import styled from "styled-components";
+import bg from "./header-bk.png";
 
-import React from 'react';
+const Header = styled.header`
+  background: url(${bg}) center;
+  background-size: cover;
+  border-bottom: 1px solid #ccc;
+`;
 
-export default function Header(props) {
+const Content = styled.div`
+  margin: auto;
+  padding: 20px 16px;
+  overflow: auto;
+`;
 
-  return (
-    <header className="header" role="banner" aria-label="Seek Header">
-      <div className="content">
-        <h1 className="site-title">
-          SEEK
-        </h1>
-      </div>
-    </header>
-  );
-}
+const Title = styled.h1`
+  font-weight: 300;
+  font-size: 25px;
+  text-decoration: none;
+  color: #fff;
+`;
+
+export default props => (
+  <Header role="banner" aria-label="Seek Header" {...props}>
+    <Content>
+      <Title>SEEK</Title>
+    </Content>
+  </Header>
+);

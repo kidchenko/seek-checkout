@@ -108,7 +108,10 @@ class PriceDiscountByQuantityCalculator {
     let total = 0;
 
     if (this.matchRule(matchProducts)) {
-      total = matchProducts.reduce(this.sumUsingNewPrice, total);
+      total = matchProducts.reduce(
+        (before, current) => this.sumUsingNewPrice(before, current),
+        total
+      );
       console.log(
         `PriceDiscountByQuantityCalculator - total: ${total}, match rule and new price: ${this
           .newPrice}`

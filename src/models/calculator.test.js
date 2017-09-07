@@ -16,7 +16,7 @@ describe("Default Calculator", () => {
 
 describe("QuantityDealCalculator", () => {
   it("should pay for classic, standout and premium", () => {
-    const calculator = new DefaultCalculator(products);
+    let calculator = new DefaultCalculator(products);
     calculator = new QuantityDealCalculator(
       calculator,
       products,
@@ -27,7 +27,7 @@ describe("QuantityDealCalculator", () => {
 
   it("should pay for 2x classic, 2x standout and 2x premium without discount", () => {
     const doubleProducts = products.concat(products);
-    const calculator = new DefaultCalculator();
+    let calculator = new DefaultCalculator();
     calculator = new QuantityDealCalculator(
       calculator,
       doubleProducts,
@@ -38,7 +38,7 @@ describe("QuantityDealCalculator", () => {
 
   it("should apply 3 for 2 deal on Classic Ads", () => {
     const products = [classic, classic, classic, premium];
-    const calculator = new DefaultCalculator();
+    let calculator = new DefaultCalculator();
     calculator = new QuantityDealCalculator(
       calculator,
       products,
